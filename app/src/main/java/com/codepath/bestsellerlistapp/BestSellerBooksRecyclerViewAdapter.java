@@ -3,10 +3,12 @@ package com.codepath.bestsellerlistapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.bestsellerlistapp.models.BestSellerBook;
 
 import java.util.List;
@@ -37,8 +39,16 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         holder.mItem = books.get(position);
         holder.mBookTitle.setText(books.get(position).title);
         holder.mBookAuthor.setText(books.get(position).author);
-        // Add ranking text
+        // Add ranking text & description
         holder.mBookRanking.setText(books.get(position).ranking);
+        holder.mBookDescription.setText(books.get(position).description);
+
+
+        BestSellerBook bestSellerBook = books.get(position);
+        Glide.with(holder.mView)
+                .load(bestSellerBook.bookImageUrl)
+                .centerInside()
+                .into(holder.mBookImage);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +62,7 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         });
     }
 
+
     @Override
     public int getItemCount() {
         return books.size();
@@ -63,19 +74,23 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         public final TextView mBookAuthor;
         public BestSellerBook mItem;
         // Add ranking
-        public final TextView mBookRanking;        
+        public final TextView mBookRanking;
+        public ImageView mBookImage;
+        public final TextView mBookDescription;
 
         public BookViewHolder(View view) {
             super(view);
             mView = view;
             mBookTitle = (TextView) view.findViewById(R.id.book_title);
             mBookAuthor = (TextView) view.findViewById(R.id.book_author);
+            mBookDescription = (TextView) view.findViewById(R.id.book_description);
             mBookRanking = (TextView) view.findViewById(R.id.ranking);
+            mBookImage = (ImageView) view.findViewById(R.id.book_image);
         }
 
         @Override
         public String toString() {
-            return mBookTitle.toString() + " '" + mBookAuthor.getText() + "'";
+            return mBookTitle.toString() + " '" + mBookAuthor.getText() + "'" + mBookDescription.getText() + "'";
         }
     }
 }
