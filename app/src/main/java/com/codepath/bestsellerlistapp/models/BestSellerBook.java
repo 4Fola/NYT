@@ -13,6 +13,10 @@ public class BestSellerBook {
    @SerializedName("author")
    public String author;
 
+   // Add ranking
+   @SerializedName("ranking")
+   public String ranking;
+
    @SerializedName("book_image")
    public String bookImageUrl;
 

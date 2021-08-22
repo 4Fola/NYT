@@ -37,6 +37,8 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         holder.mItem = books.get(position);
         holder.mBookTitle.setText(books.get(position).title);
         holder.mBookAuthor.setText(books.get(position).author);
+        // Add ranking text
+        holder.mBookRanking.setText(books.get(position).ranking);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +62,15 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         public final TextView mBookTitle;
         public final TextView mBookAuthor;
         public BestSellerBook mItem;
+        // Add ranking
+        public final TextView mBookRanking;        
 
         public BookViewHolder(View view) {
             super(view);
             mView = view;
             mBookTitle = (TextView) view.findViewById(R.id.book_title);
             mBookAuthor = (TextView) view.findViewById(R.id.book_author);
+            mBookRanking = (TextView) view.findViewById(R.id.ranking);
         }
 
         @Override
